@@ -12,8 +12,8 @@ public class DecemberEvent {
     private static final int MIN_PRICE = 10_000;
     private static final int WEEKDAY_DISCOUNT_PRICE = 2_023;
     private static final int WEEKEND_DISCOUNT_PRICE = 2_023;
-    private static final Map<Menu.Category, Integer> WEEKDAY_DISCOUNTS = Map.of(Menu.Category.DESSERT, WEEKDAY_DISCOUNT_PRICE);
-    private static final Map<Menu.Category, Integer> WEEKEND_DISCOUNTS = Map.of(Menu.Category.MAIN, WEEKEND_DISCOUNT_PRICE);
+    private static final Menu.Category WEEKDAY_DISCOUNT_CATEGORY = Menu.Category.DESSERT;
+    private static final Menu.Category WEEKEND_DISCOUNT_CATEGORY = Menu.Category.MAIN;
     private static final List<Integer> WEEKEND_DATES = Arrays.asList(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
     private static final List<Integer> STAR_DATES = Arrays.asList(3, 10, 17, 24, 25, 31);
     private static final int SPECIAL_DISCOUNT_PRICE = 1_000;
@@ -41,12 +41,16 @@ public class DecemberEvent {
         return SPECIAL_DISCOUNT_PRICE;
     }
 
-    public static Map<Menu.Category, Integer> getWeekdayDiscounts() {
-        return WEEKDAY_DISCOUNTS;
+    public static int getWeekdayDiscountPrice() { return WEEKDAY_DISCOUNT_PRICE; }
+
+    public static int getWeekendDiscountPrice() { return WEEKEND_DISCOUNT_PRICE; }
+
+    public static Menu.Category getWeekdayDiscountCategory() {
+        return WEEKDAY_DISCOUNT_CATEGORY;
     }
 
-    public static Map<Menu.Category, Integer> getWeekendDiscounts() {
-        return WEEKEND_DISCOUNTS;
+    public static Menu.Category getWeekendDiscountCategory() {
+        return WEEKEND_DISCOUNT_CATEGORY;
     }
 
     public static Map<Menu, Integer> getGiveawayBenefits() {
