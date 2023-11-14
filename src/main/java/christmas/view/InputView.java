@@ -53,7 +53,7 @@ public class InputView {
             String menuName = parts[0].trim();
             int amount = Integer.parseInt(parts[1].trim());
 
-            Menu menu = Menu.valueOf(menuName);
+            Menu menu = Menu.findByName(menuName);
             order.put(menu, amount);
         }
         return order;
