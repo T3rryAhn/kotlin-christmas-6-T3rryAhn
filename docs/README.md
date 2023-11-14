@@ -53,6 +53,19 @@
             Application.java
         🔻📁controller
             EventController.java
+        🔻📁domain
+            🔻📁logic
+                ChristmasEventCalculator.java
+                EventCalculator.java
+                EventService.java
+            🔻📁model
+                DecemberEvent.java
+                EventResult.java
+                OrderInfo.java
+            🔻📁type
+                Badge.java (enum)
+                Benefit.java (enum)
+                Menu.java (enum)
         🔻📁view
             InputView.java
             OutputView.java
@@ -60,52 +73,43 @@
             ValidationException.java
             DateValidator.java
             OrderValidator.java
-            MenuParser.java
-        🔻📁domain
-            🔻📁model
-                Event.java
-                Order.java
-            🔻📁type
-                Menu.java (enum)
-                Badge.java (enum)
-            🔻📁logic
-                DiscountPolicy.java
-                DataBasedDiscount.java
-                SpecialEvent.java
 ```
 ### 설명
 #### controller
 > 사용자의 요청을 처리하고, 모델을 조작, 적절한 응답을 뷰에 전달하는 클래스가 위치합니다.
 
+#### domain
+> 도메인 로직을 담당하는 클래스들이 위치합니다. <br>
+
+- #### logic
+> **EventCalculator**: 이벤트 할인을 계산합니다. <br>
+> **ChristmasEventCalculator**: 날짜 기반 할인 로직을 처리합니다. <br>
+> **EventService**: 주문 정보로 이벤트 결과를 만들어주는 클래스입니다. <br>
+
+- #### model
+> **DecemberEvent**: 이벤트 관련 로직을 처리합니다. <br>
+> **EventResult**: 이벤트 결과를 담는 클래스입니다. <br>
+> **OrderInfo**: 주문 정보를 담는 클래스입니다. <br>
+
+- #### type
+> **Benefit**: 혜택 종류를 나타내는 열거형입니다. <br>
+> **Menu**: 메뉴를 나타내는 열거형입니다. <br>
+> **Badge**: 뱃지를 나타내는 열거형입니다. <br>
+
+
 #### view
 > 사용자 인터페이스를 담당하는 클래스들이 위치합니다. <br>
-> 
+>
 > **InputView**: 사용자 입력을 처리. <br>
 > **OutputView**: 결과 출력을 처리.
 
 #### util
 > 유틸리티 클래스들이 위치합니다. <br>
-> 
+>
 > **ValidationException**: 사용자 정의 예외처리 클래스.
 > **DateValidator**: 날짜 유효성 검사 로직을 포함. <br>
 > **OrderValidator**: 메뉴와 수량 입력 유효성 검사 로직을 포함. <br>
-> **MenuParser**: 메뉴 관련 데이터 파싱을 담당. <br>
 
-#### domain
-> 도메인 로직을 담당하는 클래스들이 위치합니다. <br>
-
-- #### model
-> **Event**: 이벤트 관련 로직을 처리합니다. <br>
-> **Order**: 주문 정보를 처리합니다. <br>
-
-- #### type
-> **Menu**: 메뉴를 나타내는 열거형입니다. <br>
-> **Badge**: 뱃지를 나타내는 열거형입니다. <br>
-
-- #### logic
-> **DiscountPolicy**: 할인 정책을 관리합니다. <br>
-> **DateBasedDiscount**: 날짜 기반 할인 로직을 처리합니다. <br>
-> **SpecialEvent**: 특별 이벤트 관련 로직을 처리합니다. <br>
 
 -------------------
 ## 예외 상황
