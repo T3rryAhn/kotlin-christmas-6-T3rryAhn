@@ -1,7 +1,7 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.domian.type.Menu;
+import christmas.domain.type.Menu;
 import christmas.util.DateValidator;
 import christmas.util.OrderValidator;
 import christmas.util.ValidationException;

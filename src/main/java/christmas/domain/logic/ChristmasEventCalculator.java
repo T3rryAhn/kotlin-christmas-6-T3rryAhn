@@ -1,6 +1,6 @@
-package christmas.domian.logic;
+package christmas.domain.logic;
 
-import christmas.domian.model.DecemberEvent;
+import christmas.domain.model.DecemberEvent;
 
 public class ChristmasEventCalculator {
     public static int calculateChristmasDiscount(int date) {

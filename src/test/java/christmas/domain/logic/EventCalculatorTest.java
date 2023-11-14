@@ -1,8 +1,7 @@
-package christmas.logic;
+package christmas.domain.logic;
 
-import christmas.domian.logic.EventCalculator;
-import christmas.domian.type.Badge;
-import christmas.domian.type.Menu;
+import christmas.domain.type.Badge;
+import christmas.domain.type.Menu;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;

@@ -1,9 +1,10 @@
-package christmas.domian.logic;
+package christmas.domain.logic;
 
-import christmas.domian.model.DecemberEvent;
-import christmas.domian.type.Badge;
-import christmas.domian.type.Menu;
+import christmas.domain.model.DecemberEvent;
+import christmas.domain.type.Badge;
+import christmas.domain.type.Menu;
 
+import java.util.Collections;
 import java.util.Map;
 
 public class EventCalculator {
@@ -52,7 +53,7 @@ public class EventCalculator {
         if (DecemberEvent.isEligibleForGiveaway(totalPrice)) {
             return DecemberEvent.getGiveawayBenefits();
         }
-        return null;
+        return Collections.emptyMap();
     }
 
     public static Badge calculateBadge(int totalDiscount) {

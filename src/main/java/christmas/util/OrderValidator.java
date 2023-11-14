@@ -1,6 +1,6 @@
 package christmas.util;
 
-import christmas.domian.type.Menu;
+import christmas.domain.type.Menu;
 
 import java.util.*;
 import java.util.regex.Pattern;

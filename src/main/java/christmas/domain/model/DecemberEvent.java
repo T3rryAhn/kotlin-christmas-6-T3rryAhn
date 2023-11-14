@@ -1,6 +1,6 @@
-package christmas.domian.model;
+package christmas.domain.model;
 
-import christmas.domian.type.Menu;
+import christmas.domain.type.Menu;
 
 import java.util.*;
 

@@ -1,6 +1,5 @@
-package christmas.logic;
+package christmas.domain.logic;
 
-import christmas.domian.logic.ChristmasEventCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
