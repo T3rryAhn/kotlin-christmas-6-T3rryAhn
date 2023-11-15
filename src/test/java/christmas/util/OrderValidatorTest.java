@@ -2,6 +2,7 @@ package christmas.util;
 
 import christmas.domain.type.Menu;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -68,4 +69,10 @@ public class OrderValidatorTest {
         );
     }
 
+    @DisplayName("메뉴-수량-수량")
+    @ValueSource(strings = {"타파스-1-1", "타파스-1,제로콜라-1-1", "제로콜라-1-1,타파스-1"})
+    @ParameterizedTest
+    void validateOrder_InCorrectOrderButItWorks(String input) {
+        assertThrows(ValidationException.class, () -> OrderValidator.validateInput(input));
+    }
 }

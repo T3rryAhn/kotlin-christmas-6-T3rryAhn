@@ -72,6 +72,7 @@
                 DateValidator.java
                 MapToStringConverter.java
                 OrderValidator.java
+                StringUtil.java
                 ValidationException.java
         Application.java
 ```
@@ -110,6 +111,7 @@
 > **DateValidator**: 날짜 유효성 검사 로직을 포함. <br>
 > **MapToStringConverter**: Map의 key, value 값을 문자열로 변환하는 작업처리. <br>
 > **OrderValidator**: 메뉴와 수량 입력 유효성 검사 로직을 포함. <br>
+> **StringUtil**: 문자열에 타킷 문자가 몇개있는지 카운트하는 기능. <br>
 > **ValidationException**: 사용자 정의 예외처리 클래스. <br>
 
 ----------------------
@@ -128,7 +130,6 @@
 -------------------
 ## 예외 상황
 
-//TODO 중간중간 생각나는 에러상황 작성하기.
 날짜 입력
 - 문자열 입력, 공백 입력
 
@@ -146,7 +147,10 @@
 - 중복된 메뉴를 입력받는다.
 - 없는 메뉴를 입력받는다.
 
-주문 입력: 샴페인-1-1, 초코케이크-1 을 통과해서 받음.
+**case 2**
+- 주문 입력: 샴페인-1-1, 초코케이크-1 을 통과해서 받음.
+- 주문 입력: 메뉴 -- 입력시 오류발생.
+> ',' 로 분리한 문자열에 '-' 갯수가 1개 가 아니라면 예외처리.
 
 
 --------

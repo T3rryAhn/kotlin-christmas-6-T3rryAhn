@@ -7,10 +7,11 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class OrderValidator {
+    private static final String LINE_SEPARATOR = System.lineSeparator();
+
     private static final int MIN_AMOUNT = 1;
     private static final int MAX_AMOUNT = 20;
-    private static final String INPUT_PATTERN = "([\\S]+-\\d+)(,[\\S]+-\\d+)*";
-    private static final String NEW_LINE = "\n";
+    private static final String INPUT_PATTERN = "([\\S]+-\\d+)(,\\s*[\\S]+-\\d+)*";
     private static final String INVALID_ORDER_MESSAGE = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private static final String BEVERAGE_ONLY_MESSAGE = "음료만 주문할 수 없습니다.";
     private static final String INVALID_ORDER_AMOUNT_MESSAGE = "메뉴는 한 번에 1개이상, 최대 20개까지만 주문할 수 있습니다.";
@@ -19,6 +20,7 @@ public class OrderValidator {
 
     public static void validateInput(String input) {
         checkInputPattern(input);
+        checkInputPatternMore(input);
         List<String> menuNames = parseMenuName(input);
         checkDuplicated(menuNames);
 
@@ -36,7 +38,7 @@ public class OrderValidator {
         if (order.keySet()
                 .stream()
                 .allMatch(menu -> menu.getCategory() == Menu.Category.BEVERAGE)) {
-            throw new ValidationException(INVALID_ORDER_MESSAGE + NEW_LINE + BEVERAGE_ONLY_MESSAGE);
+            throw new ValidationException(INVALID_ORDER_MESSAGE + LINE_SEPARATOR + BEVERAGE_ONLY_MESSAGE);
         }
     }
 
@@ -46,12 +48,12 @@ public class OrderValidator {
                 .mapToInt(Integer::intValue).sum();
 
         if (totalAmount < MIN_AMOUNT || totalAmount > MAX_AMOUNT) {
-            throw new ValidationException(INVALID_ORDER_MESSAGE + NEW_LINE + INVALID_ORDER_AMOUNT_MESSAGE);
+            throw new ValidationException(INVALID_ORDER_MESSAGE + LINE_SEPARATOR + INVALID_ORDER_AMOUNT_MESSAGE);
         }
 
         for (Integer amount : order.values()) {
             if (amount < MIN_AMOUNT) {
-                throw new ValidationException(INVALID_ORDER_MESSAGE + NEW_LINE + INVALID_ORDER_AMOUNT_MESSAGE);
+                throw new ValidationException(INVALID_ORDER_MESSAGE + LINE_SEPARATOR + INVALID_ORDER_AMOUNT_MESSAGE);
             }
         }
     }
@@ -60,7 +62,7 @@ public class OrderValidator {
         boolean menuExists = Arrays.stream(Menu.values()).anyMatch(menu -> menu.getName().equals(menuName));
 
         if (!menuExists) {
-            throw new ValidationException(INVALID_ORDER_MESSAGE + NEW_LINE + MENU_NOT_EXIST_MESSAGE);
+            throw new ValidationException(INVALID_ORDER_MESSAGE + LINE_SEPARATOR + MENU_NOT_EXIST_MESSAGE);
         }
     }
     private static void checkDuplicated(List<String> menuNames) {
@@ -68,7 +70,7 @@ public class OrderValidator {
 
         for (String name : menuNames) {
             if (!uniqueMenuNames.add(name)) {
-                throw new ValidationException(INVALID_ORDER_MESSAGE + NEW_LINE + DUPLICATED_MENU_ORDER_MESSAGE);
+                throw new ValidationException(INVALID_ORDER_MESSAGE + LINE_SEPARATOR + DUPLICATED_MENU_ORDER_MESSAGE);
             }
         }
     }
@@ -85,6 +87,17 @@ public class OrderValidator {
                 .collect(Collectors.toList());
 
         return menuNames;
+    }
+
+    private static void checkInputPatternMore(String input) {
+        String[] items = input.split(",");
+
+        for (String item : items) {
+            int count = StringUtil.countMatches(item, '-');
+            if (count != 1) {
+                throw new ValidationException(INVALID_ORDER_MESSAGE);
+            }
+        }
     }
 
 }
