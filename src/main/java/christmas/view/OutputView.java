@@ -10,20 +10,23 @@ import christmas.util.MapToStringConverter;
 import java.util.Map;
 
 public class OutputView {
+    private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String INTRO_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
-    private static final String EVENT_CAUTION = "이벤트 주의 사항! \n - 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.\n - 음료만 주문 시, 주문할 수 없습니다.\n - 메뉴는 한번에 최대 20개까지만 주문할 수 있습니다.\n";
-    private static final String RESULT_HEAD_ORDERED_MENU = "\n<주문 메뉴>\n";
-    private static final String RESULT_HEAD_TOTAL_PRICE = "\n<할인 전 총주문 금액>\n";
-    private static final String RESULT_HEAD_GIVEAWAY_MENU = "\n<증정 메뉴>\n";
-    private static final String RESULT_HEAD_BENEFIT_DETAILS = "\n<혜택 내역>\n";
-    private static final String RESULT_HEAD_TOTAL_BENEFIT_PRICE = "\n<총혜택 금액>\n";
-    private static final String RESULT_HEAD_DISCOUNTED_TOTAL_PRICE = "\n<할인 후 예상 결제 금액>\n";
-    private static final String RESULT_HEAD_BADGE = "\n<12월 이벤트 배지>\n";
+    private static final String EVENT_CAUTION = "이벤트 주의 사항!" + LINE_SEPARATOR +
+            " - 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다." + LINE_SEPARATOR +
+            " - 음료만 주문 시, 주문할 수 없습니다." + LINE_SEPARATOR +
+            " - 메뉴는 한번에 최대 20개까지만 주문할 수 있습니다." + LINE_SEPARATOR;
+    private static final String RESULT_HEAD_ORDERED_MENU = "<주문 메뉴>";
+    private static final String RESULT_HEAD_TOTAL_PRICE = "<할인 전 총주문 금액>";
+    private static final String RESULT_HEAD_GIVEAWAY_MENU = "<증정 메뉴>";
+    private static final String RESULT_HEAD_BENEFIT_DETAILS = "<혜택 내역>";
+    private static final String RESULT_HEAD_TOTAL_BENEFIT_PRICE = "<총혜택 금액>";
+    private static final String RESULT_HEAD_DISCOUNTED_TOTAL_PRICE = "<할인 후 예상 결제 금액>";
+    private static final String RESULT_HEAD_BADGE = "<12월 이벤트 배지>";
     private static final String PRICE = "%,d원";
-    private static final String MENU_AND_QUANTITY = "%s %d개";
-    private static final String NONE = "없음\n";
+    private static final String NONE = "없음";
 
-    public void printAll(EventResult eventResult) {
+    public void printResult(EventResult eventResult) {
         printIntro(eventResult.getOrder().getDate());
         printOrder(eventResult.getOrder().getOrder());
         printTotalPrice(eventResult.getOrder().getTotalOrderPrice());
@@ -35,7 +38,7 @@ public class OutputView {
     }
 
     public void printIntro(int date) {
-        System.out.printf("\n" + INTRO_MESSAGE + "\n", date);
+        System.out.printf(LINE_SEPARATOR + INTRO_MESSAGE + LINE_SEPARATOR, date);
     }
 
     public void printCaution() {
@@ -43,7 +46,7 @@ public class OutputView {
     }
 
     public void printOrder(Map<Menu, Integer> order) {
-        System.out.printf(RESULT_HEAD_ORDERED_MENU);
+        System.out.printf(LINE_SEPARATOR + RESULT_HEAD_ORDERED_MENU + LINE_SEPARATOR);
         String result = MapToStringConverter.orderToString(order);
         System.out.printf(result);
     }
@@ -51,7 +54,7 @@ public class OutputView {
 
 
     public void printTotalPrice(int totalOrderPrice) {
-        System.out.printf(RESULT_HEAD_TOTAL_PRICE);
+        System.out.printf(LINE_SEPARATOR + RESULT_HEAD_TOTAL_PRICE + LINE_SEPARATOR);
 
         int price = totalOrderPrice;
         System.out.printf(PRICE, price);
@@ -59,9 +62,9 @@ public class OutputView {
     }
 
     public void printGiveawayMenu(boolean hasGiveawayBenefits) {
-        System.out.printf(RESULT_HEAD_GIVEAWAY_MENU);
+        System.out.printf(LINE_SEPARATOR + RESULT_HEAD_GIVEAWAY_MENU + LINE_SEPARATOR);
 
-        String result = NONE;
+        String result = NONE + LINE_SEPARATOR;
 
         if (hasGiveawayBenefits) {
             result = MapToStringConverter.orderToString(DecemberEvent.getGiveawayBenefits());
@@ -71,30 +74,34 @@ public class OutputView {
     }
 
     public void printBenefitDetails(Map<Benefit, Integer> benefitAndPrice) {
-        System.out.printf(RESULT_HEAD_BENEFIT_DETAILS);
-        String result = NONE;
+        System.out.printf(LINE_SEPARATOR + RESULT_HEAD_BENEFIT_DETAILS + LINE_SEPARATOR);
+        String result = NONE + LINE_SEPARATOR;
 
         if (!benefitAndPrice.isEmpty()) {
             result = MapToStringConverter.benefitToString(benefitAndPrice);
         }
+
         System.out.printf(result);
     }
 
     public void printTotalBenefitPrice(int totalBenefitPrice) {
-        System.out.printf(RESULT_HEAD_TOTAL_BENEFIT_PRICE);
-
-        System.out.printf("-" +PRICE + "\n", totalBenefitPrice);
+        System.out.printf(LINE_SEPARATOR + RESULT_HEAD_TOTAL_BENEFIT_PRICE + LINE_SEPARATOR);
+        String result = "-" + PRICE + LINE_SEPARATOR;
+        if (totalBenefitPrice == 0) {
+            result = PRICE + "\n";
+        }
+        System.out.printf(result, totalBenefitPrice);
     }
 
     public void printDiscountedPrice(int finalPrice) {
-        System.out.printf(RESULT_HEAD_DISCOUNTED_TOTAL_PRICE);
+        System.out.printf(LINE_SEPARATOR + RESULT_HEAD_DISCOUNTED_TOTAL_PRICE + LINE_SEPARATOR);
 
-        System.out.printf(PRICE + "\n", finalPrice);
+        System.out.printf(PRICE + LINE_SEPARATOR, finalPrice);
     }
 
     public void printBadge(Badge badge) {
-        System.out.printf(RESULT_HEAD_BADGE);
+        System.out.printf(LINE_SEPARATOR + RESULT_HEAD_BADGE + LINE_SEPARATOR);
 
-        System.out.printf(badge.getName() + "\n");
+        System.out.printf(badge.getName() + LINE_SEPARATOR);
     }
 }

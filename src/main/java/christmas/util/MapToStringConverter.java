@@ -6,6 +6,7 @@ import christmas.domain.type.Menu;
 import java.util.Map;
 
 public class MapToStringConverter {
+    private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String MENU_AND_QUANTITY = "%s %d개";
     private static final String BENEFIT_AND_PRICE = "%s: -%,d원";
 
@@ -18,7 +19,7 @@ public class MapToStringConverter {
             String formattedString = String.format(MENU_AND_QUANTITY, menu.getName(), quantity);
 
             stringBuilder.append(formattedString)
-                    .append("\n");
+                    .append(LINE_SEPARATOR);
         }
 
         return stringBuilder.toString();
@@ -33,7 +34,7 @@ public class MapToStringConverter {
             String formattedString = String.format(BENEFIT_AND_PRICE, benefit.getDescription(), price);
 
             stringBuilder.append(formattedString)
-                    .append("\n");
+                    .append(LINE_SEPARATOR);
         }
 
         return stringBuilder.toString();
