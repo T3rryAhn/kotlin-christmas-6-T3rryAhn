@@ -112,6 +112,18 @@
 > **OrderValidator**: 메뉴와 수량 입력 유효성 검사 로직을 포함. <br>
 > **ValidationException**: 사용자 정의 예외처리 클래스. <br>
 
+----------------------
+## 동작
+````
+1. Applicaton 에서 InputView, OutputView 객체를 생성하고 EventPlaner(inputView, outputView)에 주입시켜 EventPlanner객체를 생성한다.
+2. EventPlanner에서 InputView를 통해 사용자에게 날짜(int date)와 주문(Map<메뉴, 수량>)을 검증후 입력받는다.
+3. EventService(날짜, 주문)을 주입해 객체를 생성한다. eventService(객체)개 생성됨과 동시에 orderInfo(객체)가 생성된다.
+4. orderInfo는 스스로 주문 총액을 계산해서 생성된다. orderInfo의 정보를 사용해 
+    eventService에서 로직의 계산기(EventCalculator, ChristmasEventCalculator) 클래스들을 활용해 할인 혜택을 계산한다.
+5. 계산기들은 DecemberEvent에게 할인 여부를 묻는다.
+6. eventService에서 계산된 값들로 eventResult를 생성한다.
+7. eventResult의 값들을 outView에서 출력한다.
+````
 
 -------------------
 ## 예외 상황
