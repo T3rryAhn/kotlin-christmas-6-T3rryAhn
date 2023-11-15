@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.controller.EventPlanner;
 import christmas.domain.logic.EventService;
 import christmas.domain.model.EventResult;
 import christmas.domain.type.Menu;
@@ -13,11 +14,8 @@ public class Application {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        int date = inputView.readDate();
-        Map<Menu, Integer> order = inputView.readOrder();
+        EventPlanner eventPlanner = new EventPlanner(inputView, outputView);
 
-        EventService eventService = new EventService(date, order);
-        EventResult eventResult = eventService.makeEventResult();
-        outputView.printResult(eventResult);
+        eventPlanner.run();
     }
 }

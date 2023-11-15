@@ -11,7 +11,8 @@ import java.util.Map;
 
 public class OutputView {
     private static final String LINE_SEPARATOR = System.lineSeparator();
-    private static final String INTRO_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
+    private static final String INTRO_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
+    private static final String RESULT_INTRO_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
     private static final String EVENT_CAUTION = "이벤트 주의 사항!" + LINE_SEPARATOR +
             " - 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다." + LINE_SEPARATOR +
             " - 음료만 주문 시, 주문할 수 없습니다." + LINE_SEPARATOR +
@@ -26,8 +27,16 @@ public class OutputView {
     private static final String PRICE = "%,d원";
     private static final String NONE = "없음";
 
+    public void printIntro() {
+        System.out.printf(INTRO_MESSAGE + LINE_SEPARATOR);
+    }
+
+    public void printCaution() {
+        System.out.printf(EVENT_CAUTION + LINE_SEPARATOR);
+    }
+
     public void printResult(EventResult eventResult) {
-        printIntro(eventResult.getOrder().getDate());
+        printResultIntro(eventResult.getOrder().getDate());
         printOrder(eventResult.getOrder().getOrder());
         printTotalPrice(eventResult.getOrder().getTotalOrderPrice());
         printGiveawayMenu(eventResult.hasGiveawayBenefits());
@@ -37,12 +46,8 @@ public class OutputView {
         printBadge(eventResult.getBadge());
     }
 
-    public void printIntro(int date) {
-        System.out.printf(LINE_SEPARATOR + INTRO_MESSAGE + LINE_SEPARATOR, date);
-    }
-
-    public void printCaution() {
-        System.out.println(EVENT_CAUTION);
+    public void printResultIntro(int date) {
+        System.out.printf(LINE_SEPARATOR + RESULT_INTRO_MESSAGE + LINE_SEPARATOR, date);
     }
 
     public void printOrder(Map<Menu, Integer> order) {
