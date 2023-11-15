@@ -50,29 +50,30 @@
 🔻📁main
     🔻📁java
         🔻📁christmas
-            Application.java
-        🔻📁controller
-            EventController.java
-        🔻📁domain
-            🔻📁logic
-                ChristmasEventCalculator.java
-                EventCalculator.java
-                EventService.java
-            🔻📁model
-                DecemberEvent.java
-                EventResult.java
-                OrderInfo.java
-            🔻📁type
-                Badge.java (enum)
-                Benefit.java (enum)
-                Menu.java (enum)
-        🔻📁view
-            InputView.java
-            OutputView.java
-        🔻📁util
-            ValidationException.java
-            DateValidator.java
-            OrderValidator.java
+            🔻📁controller
+                EventController.java
+            🔻📁domain
+                🔻📁logic
+                    ChristmasEventCalculator.java
+                    EventCalculator.java
+                    EventService.java
+                🔻📁model
+                    DecemberEvent.java
+                    EventResult.java
+                    OrderInfo.java
+                🔻📁type
+                    Badge.java (enum)
+                    Benefit.java (enum)
+                    Menu.java (enum)
+            🔻📁view
+                InputView.java
+                OutputView.java
+            🔻📁util
+                DateValidator.java
+                MapToStringConverter.java
+                OrderValidator.java
+                ValidationException.java
+        Application.java
 ```
 ### 설명
 #### controller
@@ -101,14 +102,15 @@
 > 사용자 인터페이스를 담당하는 클래스들이 위치합니다. <br>
 >
 > **InputView**: 사용자 입력을 처리. <br>
-> **OutputView**: 결과 출력을 처리.
+> **OutputView**: 결과 출력을 처리. <br>
 
 #### util
 > 유틸리티 클래스들이 위치합니다. <br>
 >
-> **ValidationException**: 사용자 정의 예외처리 클래스.
 > **DateValidator**: 날짜 유효성 검사 로직을 포함. <br>
+> **MapToStringConverter**: Map의 key, value 값을 문자열로 변환하는 작업처리.
 > **OrderValidator**: 메뉴와 수량 입력 유효성 검사 로직을 포함. <br>
+> **ValidationException**: 사용자 정의 예외처리 클래스. <br>
 
 
 -------------------
@@ -132,3 +134,21 @@
 - 중복된 메뉴를 입력받는다.
 - 없는 메뉴를 입력받는다.
 
+--------
+## 리펙토링 할법한 것들
+
+util에 MapReader 클래스 만들기
+```
+private void readMenuAndQuantity(Map<Menu, Integer> menuAndQuantity) {
+    for (Map.Entry<Menu, Integer> entry : menuAndQuantity.entrySet()) {
+        Menu menu = entry.getKey();
+        int quantity = entry.getValue();
+
+        //연산 명령
+    }
+    
+}
+```
+이유: 위와 같은 형태가 많이 반복해서 쓰이고 있음.
+
+//연산 명령 부분만 갈아끼우는 방법이 없을까? > BiConsumer 알아보기.

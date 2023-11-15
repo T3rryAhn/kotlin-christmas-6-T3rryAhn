@@ -21,6 +21,7 @@ public class OrderValidator {
         checkInputPattern(input);
         List<String> menuNames = parseMenuName(input);
         checkDuplicated(menuNames);
+
         for (String menuName : menuNames) {
             checkMenu(menuName);
         }

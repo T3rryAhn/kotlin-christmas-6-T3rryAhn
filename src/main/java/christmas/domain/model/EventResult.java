@@ -41,6 +41,13 @@ public class EventResult {
         return badge;
     }
 
+    public boolean hasGiveawayBenefits() {
+        if (benefitHistory.containsKey(Benefit.GIVEAWAY)) {
+            return true;
+        }
+        return false;
+    }
+
     //private 헬퍼
     private int calculateFinalPrice() {
         int finalPrice = orderInfo.getTotalOrderPrice() - totalBenefitsPrice;

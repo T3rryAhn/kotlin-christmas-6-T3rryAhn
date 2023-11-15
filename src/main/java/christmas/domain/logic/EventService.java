@@ -55,7 +55,7 @@ public class EventService {
         for (Map.Entry<Menu, Integer> entry : giveaway.entrySet()) {
             Menu menu = entry.getKey();
             int quantity = entry.getValue();
-            int menuPrice = menu.getPrice(); // 메뉴의 가격을 가져옵니다.
+            int menuPrice = menu.getPrice();
 
             discount += menuPrice * quantity;
         }
