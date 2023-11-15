@@ -108,7 +108,7 @@
 > 유틸리티 클래스들이 위치합니다. <br>
 >
 > **DateValidator**: 날짜 유효성 검사 로직을 포함. <br>
-> **MapToStringConverter**: Map의 key, value 값을 문자열로 변환하는 작업처리.
+> **MapToStringConverter**: Map의 key, value 값을 문자열로 변환하는 작업처리. <br>
 > **OrderValidator**: 메뉴와 수량 입력 유효성 검사 로직을 포함. <br>
 > **ValidationException**: 사용자 정의 예외처리 클래스. <br>
 
